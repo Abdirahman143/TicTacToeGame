@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             butSelected.setBackgroundResource(R.color.blue)
             player1.add(CellID)
             ActivePlayer =2
+            outoPlay()
         }
         else
         {
@@ -135,7 +138,39 @@ class MainActivity : AppCompatActivity() {
          }else if(winner==2){
              Toast.makeText(this,"Player 2 win the game : ", Toast.LENGTH_LONG).show()
          }
-     }
 
+
+     }
+    fun outoPlay()
+    {
+      var EmptyCells= ArrayList<Int>()
+        for(CellID:Int in 1..9)
+        {
+            if(!(player1.contains(CellID)||player2.contains(CellID)))
+            {
+                EmptyCells.add(CellID)
+            }
+        }
+          var r = java.util.Random()
+        var randomIndex = r.nextInt(EmptyCells.size)
+        var CellID = EmptyCells[randomIndex]
+        var butSelected:Button??
+        butSelected =when(CellID)
+        {
+            1->but1
+            2->but2
+            3->but3
+            4->but4
+            5->but5
+            6->but6
+            7->but7
+            8->but8
+            else ->but1
+        }
+
+
+        playGame(CellID, butSelected)
+
+    }
 
 }
